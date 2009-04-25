@@ -22,7 +22,7 @@ module DataMapper
       def tagged_with(string, options = {})
         tag = Tag.first(:name => string)
         conditions = {}
-        conditions['taggings.tag_id'] = tag.id
+        conditions['taggings.tag_id'] = tag ? tag.id : nil
         conditions['taggings.tag_context'] = options.delete(:on) if options[:on]
         conditions.merge!(options)
         all(conditions)
